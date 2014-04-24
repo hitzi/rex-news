@@ -234,7 +234,9 @@ class rex_336_news {
 		if (($this->category>0) and ($this->category<>999)) $addSQL = 'AND category LIKE "%|'.$this->category.'|%" ';
 		if ($this->active == 0) $addSQL .= 'AND status = "0" ';
 		if ($this->active == 1) $addSQL .= 'AND status = "1" ';
-		if ($this->language != "") $addSQL .= 'AND clang = '.$this->language;
+		// or (cond) is needed because of the initialization with 0
+		if (($this->language != "") or ($this->language == 0))
+			$addSQL .= 'AND clang = ' . $this->language;
 		if ($this->view==1) $addSQL .= ' AND flag = 1';
         else if ($this->view==2) $addSQL .= ' AND flag = 0';
 
