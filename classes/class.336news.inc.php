@@ -301,9 +301,11 @@ class rex_336_news {
                 $item[$i]['source'] = $row["source"];
 
 				$teaser = "";
-                if($row['teaser']!="")
+                //hitzi add null check because if teaser is empty in line 332 there will be an error in substr -->
+				//Warning: strpos(): Offset not contained in string in /var/www/redaxo/include/addons/news/classes/class.336news.inc.php on line 332
+		if (($row['teaser'] != "") or ($row['teaser']== NULL)) {
 				{
-					$teaser =  $row['teaser'];
+		    $teaser =  $row['teaser'];
                     $item[$i]['teaser'] = $teaser;
 				}
 				else 
